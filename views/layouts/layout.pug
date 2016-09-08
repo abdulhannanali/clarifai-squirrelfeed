@@ -1,8 +1,10 @@
 html
 	head
 		title=title
-		link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css")
 		link(rel="icon" type="image/png" href="//i.imgur.com/CFlCQdD.png")
+		link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css")
+		style(type="text/css")
+			include ../includes/styles/styles.css	
 		block head
 	body
 		.container
@@ -10,8 +12,9 @@ html
 				.col-sm-12
 					a(href="/")
 						h1 SquirrelFeed
-		.container
-			block content
+		block content
+		include ../footer.pug
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js")
 		script(src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js")
+		include ../includes/analytics.html
 		block scripts
