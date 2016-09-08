@@ -1,0 +1,16 @@
+html
+	head
+		title=title
+		link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css")
+		block head
+	body
+		.container
+			.row
+				.col-sm-12
+					a(href="/")
+						h1 SquirrelFeed
+		.container
+			block content
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js")
+		script(src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js")
+		block scripts

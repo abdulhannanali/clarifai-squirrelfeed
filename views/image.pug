@@ -1,0 +1,70 @@
+extends ./layouts/layout.pug
+
+block head
+	style(type="text/css").
+		.tagsbody * {
+			display: inline-block;
+			margin-left: 2px;
+			margin-right: 2px;
+		}
+		.badge {
+			color: black;
+			background-color: white;
+		}		
+
+
+
+block content
+	.container
+		.row
+			.col-md-6.col-sm-12
+				h1 Squirrel army candidate profile 
+				img.img-responsive(
+				src=image.link,
+				alt="squirrel image")
+			.col-md-6.col-sm-12
+				br
+				br
+				if (image.isSquirrel)
+					h1.text-success it seems to be a squirrel
+				else
+					h1.text-danger it doesn't seem to be a squirrel
+				h2 recruited #{createdAt}
+				h2 profile last updated #{moment(image.updatedAt).fromNow()}
+				- var feedbackLink = "/feedback/squirrel?id=" + image.id
+				.row
+					.col-sm-12
+						h1.text-info is it actually a squirrel?
+				.row
+					.col-md-6.col-sm-12
+						a.btn.btn-success.btn-lg.btn-block(href=feedbackLink + "&isSquirrel=true") It's a squirrel  
+							span.badge=reports.yes
+						br
+					.col-md-6.col-sm-12
+						a.btn.btn-warning.btn-lg.btn-block(href=feedbackLink+"&isSquirrel=false") It's not a squirrel 
+							span.badge=reports.no
+		br
+		br
+		.row
+			.col-sm-12
+				.panel.panel-primary
+					.panel-heading
+						h3.panel-title Tag information
+					.panel-body
+						.tagsbody
+							each obj, c in classes
+									h3
+										a(href="/all?class=" + c + "&id=" + image.id)
+											if (obj.found)
+												span.label.label-success=c + " "
+													span.badge=obj.prob
+											else
+												span.label.label-danger=c + " "
+													span.badge=obj.prob
+		.row
+			.col-sm-12
+				.panel.panel-info
+					.panel-heading
+						h3.panel-title Discussion!
+					.panel-body
+						include ./includes/disqus.html

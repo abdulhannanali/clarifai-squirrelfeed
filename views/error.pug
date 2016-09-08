@@ -1,0 +1,18 @@
+extends ./layouts/layout.pug
+
+block head
+	style(type="text/css").
+		h1 {
+			padding-top: 250px;
+			text-align:center;
+		}
+
+		p {
+			text-align: center;
+		}
+
+block content
+	.container
+		h1=message
+		p
+			small Note: If you are the tech admin, please do check the error logs we have something interesting coming up here.

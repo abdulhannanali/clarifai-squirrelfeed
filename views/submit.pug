@@ -1,0 +1,23 @@
+extends ./layouts/layout.pug
+
+block content
+	.container
+		.row
+			.col-sm-12
+				h1 Submit a Squirrel
+				h3 You can upload an image of a squirrel or submit a url!
+		.row
+			.col-sm-12
+				form(action="submitsquirrel" method="POST" enctype="multipart/form-data")
+					.form-group
+						label(for="imageUrl") image url
+						input.form-control(type="text" name="imageUrl" id="imageUrl" placeholder="type squirrel's image url here")
+					.form-group
+						h2 Or
+					.form-group
+						label(for="imageFile") upload a file
+						input(name="imageFile" type="file" id="imageFile")
+					.form-group
+					.form-group
+						button.btn.btn-primary(type="submit") submit image	 
+					small note: if both are selected preference is given to file instead of url

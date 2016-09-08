@@ -1,0 +1,18 @@
+extends ./layouts/layout.pug
+
+block content
+	.container
+		.row
+			.col-sm-12
+				img.img-responsive(src=image.link, alt="squirrel image")
+		.row
+			.col-sm-12
+				if (isSquirrel)
+					h2 We welcome our lost member to the tribe
+				else
+					h2 Thanks for reporting a traitor
+		.row
+			.col-sm-12
+				h3 Go back to this #[a(href="/image/" + image.id) profile]
+				h3 Wait for the highest command to review your request! 
+				h4 Till then #[a(href="/submit") submit] more recruits or check out our army on #[a(href="/") homepage]

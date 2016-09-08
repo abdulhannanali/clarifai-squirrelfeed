@@ -1,0 +1,29 @@
+extends ./layouts/layout.pug
+
+block head 
+	style(type="text/css").
+		* {
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+block content
+	.container
+		.row
+			.col-sm-12
+				img.img-responsive(
+					src=image.link,
+					alt="submitted image",
+					width="600"
+					height="600")
+		.row
+			.col-sm-12
+				br
+				a.btn.btn-primary.btn-lg(href="/") Go back to homepage
+				if (!image.isSquirrel)
+					h1 It doesn't seem to be quite squirelly.
+					a.btn.btn-danger(href="/feedback/squirrel?id=" + image.id + "&isSquirrel=true") It's a squirrel!
+				else
+					h1 It's a squirrel. Thanks for working as a recruiter for our growing #[b squirrel army]. Go to #[a(href="/") homepage] to see all recruits.
+					a.btn.btn-danger(href="/feedback/squirrel?id=" + image.id + "&isSquirrel=false") It's not a squirrel
