@@ -51,8 +51,6 @@ module.exports = function (Clarifai) {
 			feedback["removeTags"] = ['squirrel']
 		}
 
-		console.log()
-
 		return Clarifai.createFeedback(image.docid, feedback, function (error, response) {
 			callback(error, response)
 		})

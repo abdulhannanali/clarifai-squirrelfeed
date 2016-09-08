@@ -53,7 +53,9 @@ app.get("/", function (req, res, next) {
 
 
 app.get("/submit", function (req, res, next) {
-	res.render("submit", {})
+	res.render("submit", {
+		title: "submit a squirrel to squirrel army"
+	})
 })
 
 app.get("/submitsquirrel", function (req, res, next) {
@@ -103,17 +105,24 @@ app.post("/submitsquirrel", upload.single("imageFile"), function (req, res, next
 				next(error)
 			}
 			else if (squirrel) {
-				Image.createImage(req.body.imageUrl, squirrel, function (error, image) {
-					if (error) {
-						next(error)
-					}
-					else {
-						res.render("imageSubmit", {
-							image: image,
-							title: "SquirrelFeed candidate submitted"
+				imgur.uploadUrl(req.body.imageUrl)
+					.then(function (response) {
+						Image.createImage(response.data.link, squirrel, function (error, image) {
+							if (error) {
+								next(error)
+							}
+							else {
+								res.render("imageSubmit", {
+									image: image,
+									title: "SquirrelFeed candidate submitted"
+								})
+							}
 						})
-					}
-				})
+					})
+					.catch(function (error) {
+						error.CODE = "IMGUR_ERROR"
+						next(error)
+					})
 			}
 			else {
 				next()
