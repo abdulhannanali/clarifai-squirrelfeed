@@ -44,6 +44,7 @@ app.get("/", function (req, res, next) {
 		isSquirrel: true
 	}, function (error, images) {
 		res.render("index", {
+			title: "SquirrelFeed army of squirrels to make humans go nuts",
 			images: images.reverse(),
 			moment: moment
 		})
@@ -79,7 +80,10 @@ app.post("/submitsquirrel", upload.single("imageFile"), function (req, res, next
 						.then(function (response) {
 							if (response.success) {
 								Image.createImage(response.data.link, squirrel, function (error, image) {
-									res.render("imageSubmit", {image: image})
+									res.render("imageSubmit", {
+										image: image,
+										title: "SquirrelFeed squirrel candidate submitted"
+									})
 								})									
 							}
 							else {
@@ -105,7 +109,8 @@ app.post("/submitsquirrel", upload.single("imageFile"), function (req, res, next
 					}
 					else {
 						res.render("imageSubmit", {
-							image: image
+							image: image,
+							title: "SquirrelFeed candidate submitted"
 						})
 					}
 				})
@@ -117,7 +122,8 @@ app.post("/submitsquirrel", upload.single("imageFile"), function (req, res, next
 	}
 	else {
 		res.render("error", {
-			message: "Submit a file or a url if the squirrel's interesting in joining the force"
+			message: "Submit a file or a url if the squirrel's interesting in joining the force",
+			title: "Submission error"
 		})
 	}
 })
@@ -129,12 +135,14 @@ app.use("/image", require("./routes/image")(Clarifai))
 app.use(function (error, req, res, next) {
 	if (error && error.CODE == "FILETYPE_NOT_SUPPORTED") {
 		res.render("error", {
-			message: "Sorry! This file type is not supported!"
+			message: "Sorry! This file type is not supported!",
+			error: "SquirrelFeed error"
 		})
 	}
 	else if (error && error.CODE == "CLARIFAI_ERROR") {
 		res.render("error", {
-			message: "Sorry an error occured while requesting from Clarifai's API. Please recheck the URL."
+			message: "Sorry an error occured while requesting from Clarifai's API. Please recheck the URL.",
+			error: "SquirrelFeed Clarifai error"
 		})
 	}
 	else {
@@ -145,7 +153,8 @@ app.use(function (error, req, res, next) {
 app.use(function (error, req, res, next) {
 	console.error(error)
 	res.render("error", {
-		message: "Sorry! An unexpected error occured. You can try again, maybe?"
+		message: "Sorry! An unexpected error occured. You can try again, maybe?",
+		title: "error occured"
 	})
 })
 

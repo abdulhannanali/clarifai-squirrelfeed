@@ -32,7 +32,8 @@ module.exports = function (Clarifai) {
 					else {
 						res.render("report", {
 							image: image,
-							isSquirrel: isSquirrel
+							isSquirrel: isSquirrel,
+							title: "squirrelfeed profile report"
 						})
 					}
 				})

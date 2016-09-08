@@ -42,7 +42,8 @@ module.exports = function (Clarifai) {
 					reports: {
 						yes: positiveReports,
 						no: negativeReports
-					}
+					},
+					title: "squirrelfeed army candidate profile"
 				})
 			}
 			else {
